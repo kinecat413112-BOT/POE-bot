@@ -2,11 +2,6 @@
   "league": "亡焰咒海",
   "targets": {
     "dawn-tower-shield": {
-      "15da117add41800fc54a6b9c77be9056047cc52264d572b763291a8da99aa601": {
-        "amount": 3,
-        "currency": "chaos",
-        "item": "巨型塔盾"
-      },
       "4184a9943eaf0603fe0ca952ecad62d6ca8f5279ccf8565492a00433c3826a66": {
         "amount": 24,
         "currency": "chrome",
@@ -22,7 +17,7 @@
         "currency": "chaos",
         "item": "巨型塔盾"
       },
-      "946496caea41766a6ad14b151b7c657ba039c9624a04da67ba6177a3f971300e": {
+      "b3a17704254d25ce569a9060e130e2b6eb28ac8e5c66173f615f5e62a6fe0c19": {
         "amount": 20,
         "currency": "chaos",
         "item": "巨型塔盾"
@@ -32,13 +27,18 @@
         "currency": "chaos",
         "item": "巨型塔盾"
       },
-      "b3a17704254d25ce569a9060e130e2b6eb28ac8e5c66173f615f5e62a6fe0c19": {
+      "6adcdc10528af73931f8f60dc760e8a79cfc1b453999fd145dd79668c7289716": {
         "amount": 20,
         "currency": "chaos",
         "item": "巨型塔盾"
       },
-      "6adcdc10528af73931f8f60dc760e8a79cfc1b453999fd145dd79668c7289716": {
+      "946496caea41766a6ad14b151b7c657ba039c9624a04da67ba6177a3f971300e": {
         "amount": 20,
+        "currency": "chaos",
+        "item": "巨型塔盾"
+      },
+      "9b3ddf56e47a0f1a81483d760edb9b93c7ac138b46a69345d1272da1a128df7c": {
+        "amount": 25,
         "currency": "chaos",
         "item": "巨型塔盾"
       },
@@ -47,29 +47,24 @@
         "currency": "chaos",
         "item": "巨型塔盾"
       },
-      "9b3ddf56e47a0f1a81483d760edb9b93c7ac138b46a69345d1272da1a128df7c": {
-        "amount": 25,
+      "afc5a6c2fc9c55bd791e9e6b3cf6920161598f5c6427963f3ab8a01aea5f0a21": {
+        "amount": 28,
         "currency": "chaos",
         "item": "巨型塔盾"
       }
     },
     "headhunter-leather-belt": {
-      "ee2fb73104df6a25e903dbc4fde178a2807f5696f31a44e136870a43cf3fd69f": {
-        "amount": 12,
-        "currency": "divine",
-        "item": "皮革腰帶"
-      },
       "a87607f71811a0ab213e9194ca5d0c6020608f2bc0c928fe8e8767f2dfec4472": {
         "amount": 13,
         "currency": "divine",
         "item": "皮革腰帶"
       },
-      "fa103dd314c9e6f409c05277d0fe1e19e320fa8e92010dbc097ae0a7ca6117c0": {
+      "c9030a8615af120562bb07c90dc54609492e260394151341d37cb26229749d29": {
         "amount": 14,
         "currency": "divine",
         "item": "皮革腰帶"
       },
-      "c9030a8615af120562bb07c90dc54609492e260394151341d37cb26229749d29": {
+      "fa103dd314c9e6f409c05277d0fe1e19e320fa8e92010dbc097ae0a7ca6117c0": {
         "amount": 14,
         "currency": "divine",
         "item": "皮革腰帶"
@@ -101,6 +96,11 @@
       },
       "3caa65cd2ddb45bda2c7dbed88e9f825e0a80c1ecf272d8da5e1003ea5411643": {
         "amount": 20,
+        "currency": "divine",
+        "item": "皮革腰帶"
+      },
+      "038c5c087035fedb438cb9e9b0c113eabda98067d4af62ade9f93270a147ecec": {
+        "amount": 23,
         "currency": "divine",
         "item": "皮革腰帶"
       }
