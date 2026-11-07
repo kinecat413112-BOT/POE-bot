@@ -89,6 +89,7 @@ const decodedSearches = TRACKED_SEARCHES.map(target => ({
 const league = await currentLeague(decodedSearches[0].origin);
 const sameLeague = previous.league === league;
 const currentTargets = {};
+const currentCheapest = {};
 const changes = [];
 const newBaselines = [];
 
@@ -106,22 +107,26 @@ for (const [index, target] of decodedSearches.entries()) {
   if (Number(search.total || 0) > 0 && !ids.length) throw new Error(`Trade search reported matches but returned no listing IDs for ${target.name}`);
 
   const listings = {};
+  let cheapest = null;
   if (ids.length) {
     const data = await tradeJson(`${target.origin}/api/trade/fetch/${ids.join(",")}?query=${encodeURIComponent(search.id)}`);
     for (const entry of data.result || []) {
       const price = entry.listing?.price;
       if (entry.id && price && Number.isFinite(Number(price.amount))) {
-        listings[entry.id] = {
+        const listing = {
           amount: Number(price.amount),
           currency: price.currency || "?",
           item: entry.item?.typeLine || entry.item?.name || "物品"
         };
+        listings[entry.id] = listing;
+        if (!cheapest) cheapest = listing;
       }
     }
   }
   if (ids.length && !Object.keys(listings).length) throw new Error(`Could not fetch prices for ${target.name}; keeping previous state`);
 
   currentTargets[target.id] = listings;
+  currentCheapest[target.id] = { target: target.name, listing: cheapest };
   const oldListings = sameLeague ? previousTargets[target.id] : null;
   if (oldListings && Object.keys(oldListings).length) {
     for (const [id, current] of Object.entries(listings)) {
@@ -135,23 +140,50 @@ for (const [index, target] of decodedSearches.entries()) {
   }
 }
 
+const cheapestLines = decodedSearches.map(target => {
+  const current = currentCheapest[target.id]?.listing;
+  return current
+    ? `• ${target.name}：**${current.amount} ${displayCurrency(current.currency)}**`
+    : `• ${target.name}：目前沒有掛單`;
+});
+const cheapestText = ["目前最低掛單：", ...cheapestLines].join("\n");
+const links = decodedSearches.map(target => `[ ${target.name} ](${leagueSearchUrl(target.url, league)})`).join("\n");
+
 if (previous.league && previous.league !== league) {
-  const links = decodedSearches.map(target => `[ ${target.name} ](${leagueSearchUrl(target.url, league)})`).join("\n");
-  await postDiscord(`**PoE 價格追蹤：新賽季**\n已切換至 ${league}，已重設追蹤搜尋的比價基準。\n${links}`);
+  await postDiscord([
+    `**PoE 價格追蹤：新賽季**（${league}）`,
+    "已重設追蹤搜尋的比價基準。",
+    cheapestText,
+    links
+  ].join("\n"));
 } else if (IS_MANUAL_TEST) {
   const totalListings = Object.values(currentTargets).reduce((sum, listings) => sum + Object.keys(listings).length, 0);
   const changeText = changes.length
-    ? `發現 ${changes.length} 筆價格變動：\n${changes.map(({ target, old, current }) => `• ${target}／${current.item}：${old.amount} ${displayCurrency(old.currency)} → **${current.amount} ${displayCurrency(current.currency)}**`).join("\n")}`
+    ? `發現 ${changes.length} 筆價格變動：`
     : "目前價格沒有變動。";
-  const baselineText = newBaselines.length ? `\n首次建立基準：${newBaselines.join("、")}。` : "";
-  const links = decodedSearches.map(target => `[ ${target.name} ](${leagueSearchUrl(target.url, league)})`).join("\n");
-  await postDiscord(`**PoE 價格追蹤手動測試**（${league}）\n已檢查 ${decodedSearches.length} 個搜尋、共 ${totalListings} 筆掛單。\n${changeText}${baselineText}\n${links}`);
-} else if (changes.length) {
-  const lines = changes.map(({ target, old, current }) => `• ${target}／${current.item}：${old.amount} ${displayCurrency(old.currency)} → **${current.amount} ${displayCurrency(current.currency)}**`);
-  const links = decodedSearches.map(target => `[ ${target.name} ](${leagueSearchUrl(target.url, league)})`).join("\n");
-  await postDiscord(`**PoE 掛單價格變動通知**（${league}）\n追蹤的搜尋結果前 ${LIMIT} 筆中，${changes.length} 筆既有掛單改價：\n${lines.join("\n")}\n${links}`);
+  const changeLines = changes.map(({ target, old, current }) => `• ${target}／${current.item}：${old.amount} ${displayCurrency(old.currency)} → **${current.amount} ${displayCurrency(current.currency)}**`);
+  const baselineText = newBaselines.length ? `首次建立基準：${newBaselines.join("、")}。` : "";
+  await postDiscord([
+    `**PoE 價格追蹤手動測試**（${league}）`,
+    `已檢查 ${decodedSearches.length} 個搜尋、共 ${totalListings} 筆掛單。`,
+    changeText,
+    ...changeLines,
+    baselineText,
+    cheapestText,
+    links
+  ].filter(Boolean).join("\n"));
 } else {
-  console.log(`No price change in ${decodedSearches.length} tracked searches.`);
+  const changeText = changes.length
+    ? `追蹤的搜尋結果前 ${LIMIT} 筆中，${changes.length} 筆既有掛單改價：`
+    : "本次檢查沒有價格變動。";
+  const changeLines = changes.map(({ target, old, current }) => `• ${target}／${current.item}：${old.amount} ${displayCurrency(old.currency)} → **${current.amount} ${displayCurrency(current.currency)}**`);
+  await postDiscord([
+    `**PoE 價格追蹤通知**（${league}）`,
+    changeText,
+    ...changeLines,
+    cheapestText,
+    links
+  ].join("\n"));
 }
 
 await writeFile(STATE_PATH, JSON.stringify({ league, targets: currentTargets }, null, 2) + "\n", "utf8");
