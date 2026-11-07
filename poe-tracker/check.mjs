@@ -1,7 +1,7 @@
 import { gunzipSync } from "node:zlib";
 import { readFile, writeFile } from "node:fs/promises";
 
-const SEARCH_URL = "https://pathofexile.tw/trade/search/%E4%BA%A1%E7%84%B0%E5%92%92%E6%B5%B7/H4sIAAAAAAAACqtWKi5JLCktVrKqVsovKMnMz1OyUkrMq1Sq1VHKS8xNVbJSerl2youFDUo6SiWVBWB-e-_LuStftG54umObkg5Yf7GSVXQ1TD4xL0VJRyktM6cktQgkEVsbWwsAi7vrE2cAAAA";
+const SEARCH_URL = "https://pathofexile.tw/trade/search/%E4%BA%A1%E7%84%B0%E5%92%92%E6%B5%B7/H4sIAAAAAAAAClWOQQrCMBRE7zLrbNzmKlLkS74YqElJfkUJ_wDi1l2h6M4DCO68Te01pIJQd_PmwTAFWUjaDFsQG_ExwIL25Gta1ww1CLRjWIzXx7s7wUCOzcTD8z705-F2GbsXzHclwy7Lz1NwMNj4WjhNotJqhgWSyPFqVsyiD44P7P4-LbaxTVA1cD5P3xyspJZV9QMpuA01xAAAAA";
 const LIMIT = 10;
 const STATE_PATH = "poe-tracker/state.json";
 const WEBHOOK = process.env.DISCORD_WEBHOOK;
