@@ -1,4 +1,10 @@
 {
   "league": "亡焰咒海",
-  "listings": {}
+  "listings": {
+    "bc0e1c77ddbc824dcd726bd4f6362ec6d2d19fe4f20c87a88b9520c6fea1e0cd": {
+      "amount": 1,
+      "currency": "divine",
+      "item": "巨型塔盾"
+    }
+  }
 }
