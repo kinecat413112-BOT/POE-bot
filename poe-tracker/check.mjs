@@ -46,7 +46,7 @@ async function postDiscord(content) {
 }
 
 const { query, origin } = decodeTradeUrl(SEARCH_URL);
-query.status = { option: "online" };
+// Preserve the exact filters encoded in the saved search URL.
 const league = await currentLeague(origin);
 const search = await tradeJson(`${origin}/api/trade/search/${encodeURIComponent(league)}`, {
   method: "POST",
@@ -55,6 +55,7 @@ const search = await tradeJson(`${origin}/api/trade/search/${encodeURIComponent(
 });
 const ids = (search.result || []).slice(0, LIMIT);
 if (!search.id) throw new Error("Trade search returned no query ID");
+if (Number(search.total || 0) > 0 && !ids.length) throw new Error("Trade search reported matches but returned no listing IDs");
 
 const listings = {};
 if (ids.length) {
