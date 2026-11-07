@@ -8,6 +8,17 @@ const WEBHOOK = process.env.DISCORD_WEBHOOK;
 const IS_MANUAL_TEST = process.env.GITHUB_EVENT_NAME === "workflow_dispatch";
 if (!WEBHOOK) throw new Error("Missing DISCORD_WEBHOOK secret");
 
+function displayCurrency(currency) {
+  const normalized = String(currency || "?").trim().toLowerCase();
+  const names = {
+    chaos: "混沌石",
+    "chaos orb": "混沌石",
+    divine: "神聖石",
+    "divine orb": "神聖石"
+  };
+  return names[normalized] || currency || "?";
+}
+
 function decodeTradeUrl(raw) {
   const u = new URL(raw);
   if (!["pathofexile.tw", "www.pathofexile.com", "pathofexile.com"].includes(u.hostname)) throw new Error("Unsupported trade URL host");
@@ -92,13 +103,13 @@ if (previous.league && previous.league !== league) {
   await postDiscord(`**PoE 價格追蹤：新賽季**\n已切換至 ${league}，已重設前 ${LIMIT} 筆掛單的比價基準。\n${url}`);
 } else if (IS_MANUAL_TEST) {
   const result = changes.length
-    ? `發現 ${changes.length} 筆價格變動：\n${changes.map(({ old, current }) => `• ${current.item}：${old.amount} ${old.currency} → **${current.amount} ${current.currency}**`).join("\n")}`
+    ? `發現 ${changes.length} 筆價格變動：\n${changes.map(({ old, current }) => `• ${current.item}：${old.amount} ${displayCurrency(old.currency)} → **${current.amount} ${displayCurrency(current.currency)}**`).join("\n")}`
     : baseline
       ? "本次成功取得搜尋結果並建立價格基準，目前沒有可比較的前次價格。"
       : "本次檢查成功，前十筆掛單價格沒有變動。";
   await postDiscord(`**PoE 價格追蹤手動測試**（${league}）\n已檢查前 ${Object.keys(listings).length} 筆掛單。\n${result}\n[開啟交易搜尋](${url})`);
 } else if (changes.length) {
-  const lines = changes.map(({ old, current }) => `• ${current.item}：${old.amount} ${old.currency} → **${current.amount} ${current.currency}**`);
+  const lines = changes.map(({ old, current }) => `• ${current.item}：${old.amount} ${displayCurrency(old.currency)} → **${current.amount} ${displayCurrency(current.currency)}**`);
   await postDiscord(`**PoE 掛單價格變動通知**（${league}）\n前 ${LIMIT} 筆「即刻購買以及面對面交易」搜尋結果中，${changes.length} 筆既有掛單改價：\n${lines.join("\n")}\n[開啟交易搜尋](${url})`);
 } else if (!baseline) {
   console.log("No price change in the first 10 listings.");
