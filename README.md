@@ -1,6 +1,6 @@
 # PoE Trade Price Watcher
 
-Every five minutes, an external cron-job.org job triggers GitHub Actions. The workflow checks the first 10 online listings from the configured Taiwanese PoE trade search and sends a Discord message when the price of the same listing ID changes.
+Every five minutes, an external cron-job.org job triggers GitHub Actions. The workflow checks the first 10 listings matching the saved search filters from the configured Taiwanese PoE trade search and sends a Discord message when the price of the same listing ID changes.
 
 ## Secrets to configure
 
@@ -29,7 +29,7 @@ You can first run the workflow manually from **Actions → PoE 前十筆物品�
 
 ## Scope and request volume
 
-The check fetches the current challenge league, performs one search, then fetches up to 10 listing details in a single request. It monitors only the 10 cheapest online results. The trade API's rate limits can change dynamically; repeated 429 responses should be handled by slowing the cron schedule.
+The check fetches the current challenge league, performs one search, then fetches up to 10 listing details in a single request. It monitors only the first 10 price-sorted results returned for the saved search filters. The trade API's rate limits can change dynamically; repeated 429 responses should be handled by slowing the cron schedule.
 
 The search URL is configured in `poe-tracker/check.mjs`. The tracked state is stored in `poe-tracker/state.json`; GitHub Actions commits it only when the prices or listings have changed.
 
