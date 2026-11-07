@@ -30,7 +30,7 @@ async function tradeJson(url, init = {}) {
 async function currentLeague(origin) {
   const data = await tradeJson(`${origin}/api/trade/data/leagues`);
   const entries = data.result || data;
-  const excluded = /standard|hardcore|ruthless|solo.?self.?found|\\bssf\\b|標準|專家|自力更生/i;
+  const excluded = /standard|hardcore|ruthless|solo.?self.?found|\bssf\b|標準|專家|自力更生/i;
   const candidates = entries.filter(x => x?.id && !excluded.test(`${x.id} ${x.text || ""}`));
   if (candidates.length !== 1) throw new Error(`Cannot safely identify current softcore challenge league (${candidates.length} candidates)`);
   return candidates[0].id;
