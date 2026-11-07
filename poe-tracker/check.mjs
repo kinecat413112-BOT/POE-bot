@@ -5,12 +5,12 @@ const TRACKED_SEARCHES = [
   {
     id: "dawn-tower-shield",
     name: "破曉（巨型塔盾）",
-    url: "https://pathofexile.tw/trade/search/%E4%BA%A1%E7%84%B0%E5%92%92%E6%B5%B7/H4sIAAAAAAAAClWOQQrCMBRE7zLrbNzmKlLkS74YqElJfkUJ_wDi1l2h6M4DCO68Te01pIJQd_PmwTAFWUjaDFsQG_ExwIL25Gta1ww1CLRjWIzXx7s7wUCOzcTD8z705-F2GbsXzHclwy7Lz1NwMNj4WjhNotJqhgWSyPFqVsyiD44P7P4-LbaxTVA1cD5P3xyspJZV9QMpuA01xAAAAA"
+    url: "https://pathofexile.tw/trade/search/%E4%BA%A1%E7%84%B0%E5%92%92%E6%B5%B7/H4sIAAAAAAAACqtWKi5JLCktVrKqVsovKMnMz1OyUkosS8zMSUzKSVWq1VHKS8xNVbJSer5gy7PZnUo6SiWVBSD-0-0rns7rfrpwyvPZ-5R0wKYUK1lFV8PkE_NSlHSU0jJzSlKLQBKxtbFI3GqlkqLElNR4JAEkZkFRZnIqiouSMxLzi-NTMssy81KVakEAAIP2d1C5AAAA"
   },
   {
     id: "headhunter-leather-belt",
     name: "獵首（皮革腰帶）",
-    url: "https://pathofexile.tw/trade/search/%E4%BA%A1%E7%84%B0%E5%92%92%E6%B5%B7/H4sIAAAAAAAACqtWKi5JLCktVrKqVsovKMnMz1OyUkosS8zMSUzKSVWq1VHKS8xNVbJSet679eWyaUo6SiWVBWD-rHUv56580brh6Y5tSjpgU4qVrKKrYfKJeSlKOkppmTklqUUgidja2FoAc30u520AAAA"
+    url: "https://pathofexile.tw/trade/search/%E4%BA%99%E7%84%B0%E5%92%92%E6%B5%B7/H4sIAAAAAAAACqtWKi5JLCktVrKqVsovKMnMz1OyUkosS8zMSUzKSVWq1VHKS8xNVbJSet679eWyaUo6SiWVBWD-rHUv56580brh6Y5tSjpgU4qVrKKrYfKJeSlKOkppmTklqUUgidjaWCRutVJJUWJKajySABKzoCgzORXFRckZifnF8SmZZZl5qUq1IAAA-epdF7kAAAA"
   }
 ];
 const LIMIT = 10;
