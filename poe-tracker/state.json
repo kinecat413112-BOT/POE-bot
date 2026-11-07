@@ -2,7 +2,7 @@
   "league": "亡焰咒海",
   "listings": {
     "15da117add41800fc54a6b9c77be9056047cc52264d572b763291a8da99aa601": {
-      "amount": 5,
+      "amount": 4,
       "currency": "chaos",
       "item": "巨型塔盾"
     },
@@ -11,18 +11,13 @@
       "currency": "chrome",
       "item": "巨型塔盾"
     },
-    "02be42bfc767c04c830e2704f0f2fdc618c82bfd996ba675ec73e5b23e271409": {
-      "amount": 10,
-      "currency": "chaos",
-      "item": "巨型塔盾"
-    },
     "7f9ef02d9ad49296bec88c67ee9a0c2d1d8a4836b3049c9f3ad6e9bd6b3b187f": {
       "amount": 10,
       "currency": "chaos",
       "item": "巨型塔盾"
     },
-    "b9cd0d28e65e1c2894b003f9b6258f2506f50fcacf5cdb102c8a49a1f23d2174": {
-      "amount": 20,
+    "02be42bfc767c04c830e2704f0f2fdc618c82bfd996ba675ec73e5b23e271409": {
+      "amount": 10,
       "currency": "chaos",
       "item": "巨型塔盾"
     },
@@ -36,17 +31,22 @@
       "currency": "chaos",
       "item": "巨型塔盾"
     },
+    "b9cd0d28e65e1c2894b003f9b6258f2506f50fcacf5cdb102c8a49a1f23d2174": {
+      "amount": 20,
+      "currency": "chaos",
+      "item": "巨型塔盾"
+    },
     "946496caea41766a6ad14b151b7c657ba039c9624a04da67ba6177a3f971300e": {
       "amount": 20,
       "currency": "chaos",
       "item": "巨型塔盾"
     },
-    "39132b01b98d0fa07920bb993e5ebe422a4562cfd2d1047f6d36e93140d16f5a": {
+    "9b3ddf56e47a0f1a81483d760edb9b93c7ac138b46a69345d1272da1a128df7c": {
       "amount": 25,
       "currency": "chaos",
       "item": "巨型塔盾"
     },
-    "9b3ddf56e47a0f1a81483d760edb9b93c7ac138b46a69345d1272da1a128df7c": {
+    "39132b01b98d0fa07920bb993e5ebe422a4562cfd2d1047f6d36e93140d16f5a": {
       "amount": 25,
       "currency": "chaos",
       "item": "巨型塔盾"
