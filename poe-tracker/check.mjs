@@ -91,7 +91,7 @@ if (previous.league && previous.league !== league) {
   const lines = changes.map(({ old, current }) => `• ${current.item}：${old.amount} ${old.currency} → **${current.amount} ${current.currency}**`);
   const url = new URL(SEARCH_URL);
   url.pathname = url.pathname.replace(/(\/trade\/search\/)[^/]+/, `$1${encodeURIComponent(league)}`);
-  await postDiscord(`**PoE 掛單價格變動通知**（${league}）\n前 ${LIMIT} 筆在線結果中，${changes.length} 筆既有掛單改價：\n${lines.join("\n")}\n[開啟交易搜尋](${url})`);
+  await postDiscord(`**PoE 掛單價格變動通知**（${league}）\n前 ${LIMIT} 筆「即刻購買以及面對面交易」搜尋結果中，${changes.length} 筆既有掛單改價：\n${lines.join("\n")}\n[開啟交易搜尋](${url})`);
 } else if (!baseline) {
   console.log("No price change in the first 10 listings.");
 } else {
